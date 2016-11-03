@@ -56,7 +56,7 @@ return [
     // +----------------------------------------------------------------------
 
     // 默认模块名
-    'default_module'         => 'index',
+    'default_module'         => 'home',
     // 禁止访问模块
     'deny_module_list'       => ['common'],
     // 默认控制器名
@@ -131,7 +131,22 @@ return [
     ],
 
     // 视图输出字符串内容替换
-    'view_replace_str'       => [],
+    'view_replace_str' => [
+        /*  '__ROOT__' => Request::instance()->root(),
+          '__STATIC__' => Request::instance()->root() . '/static/admin',
+          '__LIB__'    => Request::instance()->root() . '/static/admin/lib',*/
+
+        '__HOME_CSS__'    =>  '/static/home/css',
+        '__HOME_JS__'       =>  '/static/home/js',
+        '__HOME_IMAGES__'   =>  '/static/home/images',
+
+        '__RAND_IMAGES__'   =>  '/static/randimg',
+
+        '__ADMIN__'     =>  '/static/admin',
+        '__ADMIN_LIB__'     =>  '/static/admin/lib',
+        '__ADMIN_IMAGES__'  =>  '/static/admin/images',
+        '__ADMIN_UI_CORE__' =>  '/static/admin/ui-core',
+    ],
     // 默认跳转页面对应的模板文件
     'dispatch_success_tmpl'  => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
     'dispatch_error_tmpl'    => THINK_PATH . 'tpl' . DS . 'dispatch_jump.tpl',
