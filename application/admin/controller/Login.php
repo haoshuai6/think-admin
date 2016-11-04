@@ -4,6 +4,7 @@ namespace app\admin\controller;
 use think\Request;
 use think\View;
 use think\Config;
+use think\Loader;
 
 /**
  *  用户登录、登出、验证码
@@ -19,13 +20,17 @@ class Login
      * 登入
      */
     public function login_in() {
-      /*  if(Request::instance()->param(false)){ //无form提交,登录页面
-
+        if(!Request::instance()->isPost()){ //无form提交,登录页面
+            return $this->view->fetch();
 
         }else{
+            $data = Request::instance()->post();
+            $validate = Loader::validate('Login');
+            if(!$validate->check($data)){
+                dump($validate->getError());
+            }
+        }
 
-        }*/
-        return $this->view->fetch();
 
     }
     /**

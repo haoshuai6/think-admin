@@ -29,28 +29,26 @@
 
 </head>
 <body>
-<div class="header">
-    <h1>{$Think.config.site.name} - 后台管理系统</h1>
-</div>
+
 <div class="loginWraper">
     <div id="loginform" class="loginBox">
-        <form class="form form-horizontal" action="index.html" method="post">
+        <form class="form form-horizontal" action="{:\\think\\Url::build('Login_in')}" method="post" id="form">
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
                 <div class="formControls col-xs-8">
-                    <input id="user" name="" type="text" placeholder="账户" class="input-text size-L">
+                    <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L" datatype="*"  nullmsg="请填写账户" >
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
                 <div class="formControls col-xs-8">
-                    <input id="passs" name="" type="password" placeholder="密码" class="input-text size-L">
+                    <input type="password"  name="password" placeholder="密码" class="input-text size-L" datatype="*6-15" errormsg="密码范围在6~15位之间！" nullmsg="请填写密码" />
                 </div>
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
-                    <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
-                    <img src="images/VerifyCode.aspx.png"> <a id="kanbuq" href="javascript:;">看不清，换一张</a> </div>
+                    <input name="captcha" class="input-text size-L" type="text" placeholder="验证码" style="width:100px;" datatype="*" nullmsg="请填写验证码">
+                    <img id="captcha" src="{:captcha_src()}" alt="验证码" title="点击刷新验证码" style="cursor:pointer;width: 150px;height: 40px">
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
@@ -68,9 +66,35 @@
         </form>
     </div>
 </div>
-<div class="footer">Copyright {$Think.config.site.name} by H-ui.admin.v2.3</div>
+
 <script type="text/javascript" src="__ADMIN_LIB__/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="__ADMIN_UI_CORE__/h-ui/js/H-ui.js"></script>
+<script type="text/javascript" src="__ADMIN_LIB__/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__ADMIN_LIB__/Validform/5.3.2/Validform.min.js"></script>
 
+<script>
+    $(function () {
+        $("#captcha").click(function () {
+            $(this).attr("src","{:captcha_src()}?m="+Math.random())
+        });
+        /*Validform表单验证*/
+        $("#form").Validform({
+            tiptype:3,
+            ajaxPost:false,
+            showAllError:true,
+            /*如果开启ajax方式，则callback，返回data是你自己定义好的json数据格式
+            * 如果不是ajax方式，
+            * */
+            callback:function(data){
+              /* if(data.status == 'y'){
+                   layer.msg("登录成功！");
+
+               }*/
+               /*不是ajax方式*/
+                return true;
+            }
+        });
+    });
+</script>
 </body>
 </html>
