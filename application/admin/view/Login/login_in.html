@@ -49,6 +49,7 @@
                 <div class="formControls col-xs-8 col-xs-offset-3">
                     <input name="captcha" class="input-text size-L" type="text" placeholder="验证码" style="width:100px;" datatype="*" nullmsg="请填写验证码">
                     <img id="captcha" src="{:captcha_src()}" alt="验证码" title="点击刷新验证码" style="cursor:pointer;width: 150px;height: 40px">
+                </div>
             </div>
             <div class="row cl">
                 <div class="formControls col-xs-8 col-xs-offset-3">
@@ -64,6 +65,7 @@
                 </div>
             </div>
         </form>
+
     </div>
 </div>
 
@@ -82,16 +84,16 @@
             tiptype:3,
             ajaxPost:false,
             showAllError:true,
-            /*如果开启ajax方式，则callback，返回data是你自己定义好的json数据格式
-            * 如果不是ajax方式，
+            /*若开启ajax方式，则callback，返回data是你自己定义好的json数据格式
+            * 若不是ajax方式，若不是ajax方式，直接返回 return true;
             * */
             callback:function(data){
-              /* if(data.status == 'y'){
+               if(data){
                    layer.msg("登录成功！");
 
-               }*/
-               /*不是ajax方式*/
-                return true;
+               }
+
+
             }
         });
     });

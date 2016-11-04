@@ -5,6 +5,8 @@ use think\Request;
 use think\View;
 use think\Config;
 use think\Loader;
+use \traits\controller\Jump;
+
 
 /**
  *  用户登录、登出、验证码
@@ -27,7 +29,8 @@ class Login
             $data = Request::instance()->post();
             $validate = Loader::validate('Login');
             if(!$validate->check($data)){
-                dump($validate->getError());
+                return $this->error($validate->getError());
+
             }
         }
 

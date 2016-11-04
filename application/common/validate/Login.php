@@ -15,6 +15,7 @@ class Login extends Validate
     protected $message  =   [
         'username.require' => '名称必须',
         'username.max'     => '名称最多不能超过25个字符',
+        'password.require'     => '密码必须',
 
     ];
 
