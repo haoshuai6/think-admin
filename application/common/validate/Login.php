@@ -6,15 +6,15 @@ use think\Validate;
 class Login extends Validate
 {
     protected $rule =   [
-        'username'  => 'require|max:25',
+        'account'  => 'require|max:25',
         'password'     => 'require',
         'captcha|验证码'     => 'require|captcha',
 
     ];
 
     protected $message  =   [
-        'username.require' => '名称必须',
-        'username.max'     => '名称最多不能超过25个字符',
+        'account.require' => '名称必须',
+        'account.max'     => '名称最多不能超过25个字符',
         'password.require'     => '密码必须',
 
     ];

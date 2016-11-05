@@ -36,7 +36,7 @@
             <div class="row cl">
                 <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
                 <div class="formControls col-xs-8">
-                    <input id="username" name="username" type="text" placeholder="账户" class="input-text size-L" datatype="*"  nullmsg="请填写账户" >
+                    <input id="account" name="account" type="text" placeholder="账户" class="input-text size-L" datatype="*"  nullmsg="请填写账户" >
                 </div>
             </div>
             <div class="row cl">
@@ -81,19 +81,23 @@
         });
         /*Validform表单验证*/
         $("#form").Validform({
-            tiptype:3,
-            ajaxPost:false,
+            tiptype:2,
+            ajaxPost:true,
             showAllError:true,
             /*若开启ajax方式，则callback，返回data是你自己定义好的json数据格式
             * 若不是ajax方式，若不是ajax方式，直接返回 return true;
             * */
             callback:function(data){
-               if(data){
+               if(data.code) {
+                   if (data.msg == '验证码错误!') {
+                       $("#captcha").click();
+                       $("[name='captcha']").val('');
+                   }
+                   layer.alert(data.msg);
+               }else {
                    layer.msg("登录成功！");
-
+                   location.href = '{:\\think\\Request::instance()->get("callback") ?: \\think\\Url::build("Index/index")}';
                }
-
-
             }
         });
     });

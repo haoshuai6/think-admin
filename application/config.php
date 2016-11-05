@@ -264,4 +264,7 @@ return [
         // 验证成功后是否重置
         'reset'    => true
     ],
+
+    'AUTH_SESSION_ADMIN'      => 'AUTH_HSBLOG_ADMIN',        // 认证SESSION标记
+
 ];
