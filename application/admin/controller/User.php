@@ -4,17 +4,10 @@ namespace app\admin\controller;
 /**
  *  用户中心
 */
-class Center
+class User
 {
-    public function login_in() {
-
-    }
-    /**
-     * 登出
-     */
-    public function login_out() {
-
-    }
+    
+    
     /**
      * 检测用户登录
      */
@@ -27,6 +20,8 @@ class Center
     public function UpdatePassword(){
 
     }
+    
+    
 
 }
 
