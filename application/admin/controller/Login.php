@@ -6,8 +6,6 @@ use think\View;
 use think\Config;
 use think\Loader;
 use think\Session;
-use think\Auth;
-use \traits\controller\Jump;
 
 
 /**

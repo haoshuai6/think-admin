@@ -43,12 +43,10 @@ function captcha_src($id = "")
 /**
  * @param $id
  * @return mixed
- * @update：20161104>haoshuai_it> 点击更换验证码
  */
 function captcha_img($id = "")
 {
-    /*return '<img src="' . captcha_src($id) . '" alt="captcha" />';*/
-    return '<img src="' . captcha_src($id) . '" alt="点击更换" onclick="this.src=\''.captcha_src().'?id=\'+Math.random();" />';
+    return '<img src="' . captcha_src($id) . '" alt="captcha" />';
 }
 
 
