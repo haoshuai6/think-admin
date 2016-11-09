@@ -1,7 +1,11 @@
 {extend name="template/base" /}
 {block name="style"}
-<link rel="stylesheet" type="text/css" href="__ADMIN_LIB__/zTree/v3/css/zTreeStyle/zTreeStyle.css" />
-
+<link rel="stylesheet" type="text/css" href="__ADMIN_LIB__/zTree/css/zTreeStyle/zTreeStyle.css" />
+<style>
+    .line{
+        border-top: solid 0px #eee !important;
+    }
+</style>
 {/block}
 {block name="nav"}{/block}
 {block name="content"}
@@ -11,73 +15,42 @@
             <button type="button" class="ml-20 btn btn-default radius" onclick="layer_close()">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
         </div>
         <div>
-            <ul id="treeDemo" class="ztree"></ul>
+            <ul id="tree" class="ztree"></ul>
         </div>
 </div>
 {/block}
 {block name="script"}
-<script type="text/javascript" src="__ADMIN_LIB__/zTree/v3/js/jquery.ztree.core.js"></script>
-<script type="text/javascript" src="__ADMIN_LIB__/zTree/v3/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="__ADMIN_LIB__/zTree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="__ADMIN_LIB__/zTree/js/jquery.ztree.excheck.js"></script>
 <script>
-    $(function () {
-        var setting = {
-            check: {
+    var setting = {
+        check: {
+            enable: true
+        },
+        data: {
+            simpleData: {
                 enable: true
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
             }
-        };
-
-        var zNodes =[
-            { id:1, pId:0, name:"随意勾选 1", open:true},
-            { id:11, pId:1, name:"随意勾选 1-1", open:true},
-            { id:111, pId:11, name:"随意勾选 1-1-1"},
-            { id:112, pId:11, name:"随意勾选 1-1-2"},
-            { id:12, pId:1, name:"随意勾选 1-2", open:true},
-            { id:121, pId:12, name:"随意勾选 1-2-1"},
-            { id:122, pId:12, name:"随意勾选 1-2-2"},
-            { id:2, pId:0, name:"随意勾选 2", checked:true, open:true},
-            { id:21, pId:2, name:"随意勾选 2-1"},
-            { id:22, pId:2, name:"随意勾选 2-2", open:true},
-            { id:221, pId:22, name:"随意勾选 2-2-1", checked:true},
-            { id:222, pId:22, name:"随意勾选 2-2-2"},
-            { id:23, pId:2, name:"随意勾选 2-3"}
-        ];
-
-        var code;
-
-        function setCheck() {
-            var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
-                    py = $("#py").attr("checked")? "p":"",
-                    sy = $("#sy").attr("checked")? "s":"",
-                    pn = $("#pn").attr("checked")? "p":"",
-                    sn = $("#sn").attr("checked")? "s":"",
-                    type = { "Y":py + sy, "N":pn + sn};
-            zTree.setting.check.chkboxType = type;
-            showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
         }
-        function showCode(str) {
-            if (!code) code = $("#code");
-            code.empty();
-            code.append("<li>"+str+"</li>");
-        }
+    };
+    var zNodes =[
+        { id:1, pId:0, name:"随意勾选 1"+"<p style='color: red;'>[sss]</p>", open:true},
+        { id:11, pId:1, name:"随意勾选 1-1", open:true},
+        { id:111, pId:11, name:"随意勾选 1-1-1"},
+        { id:112, pId:11, name:"随意勾选 1-1-2"},
+        { id:12, pId:1, name:"随意勾选 1-2", open:true},
+        { id:121, pId:12, name:"随意勾选 1-2-1"},
+        { id:122, pId:12, name:"随意勾选 1-2-2"},
+        { id:2, pId:0, name:"随意勾选 2", checked:true, open:true},
+        { id:21, pId:2, name:"随意勾选 2-1"},
+        { id:22, pId:2, name:"随意勾选 2-2", open:true},
+        { id:221, pId:22, name:"随意勾选 2-2-1", checked:true},
+        { id:222, pId:22, name:"随意勾选 2-2-2"},
+        { id:23, pId:2, name:"随意勾选 2-3"}
+    ];
 
-        $(document).ready(function(){
-            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
-            setCheck();
-            $("#py").bind("change", setCheck);
-            $("#sy").bind("change", setCheck);
-            $("#pn").bind("change", setCheck);
-            $("#sn").bind("change", setCheck);
-        });
-
-        $(".save").click(function () {
-            var node = $("#tree").getCheckedNodes();
-            ajax_req('{:\\think\\Request::instance()->baseUrl()}',{id:'{:\\think\\Request::instance()->param("id")}','node_id':node},undefined,undefined,true);
-        });
-    })
+    $(function(){
+        $.fn.zTree.init($("#tree"), setting, zNodes);
+    });
 </script>
 {/block}
