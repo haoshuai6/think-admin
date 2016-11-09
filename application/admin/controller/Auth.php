@@ -1,7 +1,10 @@
 <?php
 namespace app\admin\controller;
+
 use app\admin\AdminBaseController;
 use think\Db;
+use think\Request;
+use think\Exception;
 
 class Auth extends AdminBaseController
 {
@@ -103,8 +106,42 @@ class Auth extends AdminBaseController
      * 规则 树状图
     */
     public function  access_tree(){
-        return $this->view->fetch();
+
+        $role_id =  Request::instance()->param('id/d');
+        if (Request::instance()->isPost()) {
+            if (!$role_id) {
+                return ajax_return_error("缺少必要参数");
+            }
+
+             
+            return ajax_return_adv("权限分配成功", '');
+        } else {
+            /*if (!$role_id) {
+                throw new Exception("缺少必要参数");
+            }*/
+                 
+            
+           /* $this->view->assign("tree", json_encode($tree));*/
+
+            return $this->view->fetch();
+        }
+    }
+    /**
+     * 生成权限树
+     * @param $role_id
+     * @return array
+     */
+    public function getAccessTree($role_id)
+    {
+        //分组信息
+        $groups = Db::name("auth_group")->order("id asc")->select();
+
+        
+
 
     }
+    
+    
+
 
 }
