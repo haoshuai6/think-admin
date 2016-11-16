@@ -48,8 +48,6 @@ class Login
             }
             $map['account'] = $data['account'];
             $map['status'] = 1;
-
-
         }
     }
     /**

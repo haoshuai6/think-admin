@@ -112,17 +112,12 @@ class Auth extends AdminBaseController
             if (!$role_id) {
                 return ajax_return_error("缺少必要参数");
             }
-
-             
             return ajax_return_adv("权限分配成功", '');
         } else {
             /*if (!$role_id) {
                 throw new Exception("缺少必要参数");
             }*/
-                 
-            
            /* $this->view->assign("tree", json_encode($tree));*/
-
             return $this->view->fetch();
         }
     }
@@ -134,10 +129,7 @@ class Auth extends AdminBaseController
     public function getAccessTree($role_id)
     {
         //分组信息
-        $groups = Db::name("auth_group")->order("id asc")->select();
-
-        
-
+        //$groups = Db::name("auth_group")->order("id asc")->select();
 
     }
     
