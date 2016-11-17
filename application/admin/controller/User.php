@@ -6,8 +6,6 @@ namespace app\admin\controller;
 */
 class User
 {
-    
-    
     /**
      * 检测用户登录
      */
@@ -20,8 +18,5 @@ class User
     public function UpdatePassword(){
 
     }
-    
-    
-
 }
 

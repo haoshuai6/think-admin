@@ -60,10 +60,6 @@ class Login
      * 检测用户登录
      */
     public function  checkUserLogin(){
-
     }
-   
-   
-
 }
 

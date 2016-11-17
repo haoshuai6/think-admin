@@ -130,10 +130,5 @@ class Auth extends AdminBaseController
     {
         //分组信息
         //$groups = Db::name("auth_group")->order("id asc")->select();
-
     }
-    
-    
-
-
 }
