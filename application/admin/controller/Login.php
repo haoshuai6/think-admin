@@ -54,7 +54,7 @@ class Login
      * 登出
      */
     public function login_out() {
-
+                
     }
     /**
      * 检测用户登录
