@@ -9,46 +9,34 @@
     <title>{block name="title"}{$Think.config.site.title}{/block}</title>
     <meta name="keywords" content="{$Think.config.site.keywords}">
     <meta name="description" content="{$Think.config.site.description}">
-
     <link rel="Bookmark" href="/favicon.ico" >
     <link rel="Shortcut Icon" href="/favicon.ico" />
-
     <!--[if lt IE 9]>
     <script type="text/javascript" src="__ADMIN_LIB__/html5.js"></script>
     <script type="text/javascript" src="__ADMIN_LIB__/respond.min.js"></script>
     <script type="text/javascript" src="__ADMIN_LIB__/PIE_IE678.js"></script>
     <![endif]-->
-
     <link rel="stylesheet" type="text/css" href="__ADMIN_UI_CORE__/h-ui/css/H-ui.min.css" />
     <link rel="stylesheet" type="text/css" href="__ADMIN_UI_CORE__/h-ui.admin/css/H-ui.admin.css" />
     <link rel="stylesheet" type="text/css" href="__ADMIN_LIB__/Hui-iconfont/1.0.7/iconfont.css" />
-
     <link rel="stylesheet" type="text/css" href="__ADMIN_LIB__/icheck/skins/flat/_all.css" />
-
     <link rel="stylesheet" type="text/css" href="__ADMIN_UI_CORE__/h-ui.admin/skin/default/skin.css" id="skin" />
     <link rel="stylesheet" type="text/css" href="__ADMIN_UI_CORE__/h-ui.admin/css/style.css" />
-
     {block name="style"}<!--others style-->{/block}
-
     <!--[if IE 6]>
     <script type="text/javascript" src="__ADMIN_LIB__/DD_belatedPNG_0.0.8a-min.js" ></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-
 </head>
 <body>
 {block name="nav"}<!--内页-面包屑导航-->{/block}
-
 {block name="content"}{/block}
-
 <script type="text/javascript" src="__ADMIN_LIB__/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="__ADMIN_LIB__/Validform/5.3.2/Validform.js"></script>
 <script type="text/javascript" src="__ADMIN_LIB__/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__ADMIN_LIB__/icheck/icheck.min.js"></script>
 <script type="text/javascript" src="__ADMIN_UI_CORE__/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="__ADMIN_UI_CORE__/h-ui.admin/js/H-ui.admin.js"></script>
-<script type="text/javascript" src="__ADMIN_LIB__/icheck/icheck.min.js"></script>
-
-
 {block name="script"}<!--others script-->{/block}
-
 </body>
 </html>

@@ -1,3 +1,13 @@
 @charset "utf-8";
 /* 你自己的样式 */
 
+.th-25{
+    width: 25% !important;
+}
+.th-20{
+    width: 20% !important;
+}
+ul.inline>li, ol.inline>li {
+    line-height: 30px !important;
+}
+

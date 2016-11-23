@@ -106,20 +106,87 @@ class Auth extends AdminBaseController
      * 规则 树状图
     */
     public function  access_tree(){
-
-        $role_id =  Request::instance()->param('id/d');
+        $group_id =  Request::instance()->param('g_id/d');
+        if (!$group_id) {
+            return ajax_return_error("缺少必要参数");
+        }
         if (Request::instance()->isPost()) {
-            if (!$role_id) {
-                return ajax_return_error("缺少必要参数");
+            $rule_ids = Request::instance()->post('rule_ids');
+            $group_res = Db::name("auth_group")->where(array('id'=>$group_id))
+                ->setField('rules', trim($rule_ids));
+            if($group_res){ //修改成功
+                return ajax_return_adv("权限分配成功", '');
+            }else {
+                return ajax_return_adv("权限分配失败", '');
             }
-            return ajax_return_adv("权限分配成功", '');
         } else {
-            /*if (!$role_id) {
-                throw new Exception("缺少必要参数");
-            }*/
-           /* $this->view->assign("tree", json_encode($tree));*/
+            /*渲染zTree的json数据*/
+            $group_rule = Db::name("auth_group")->where(array('id'=>$group_id))->find();
+            /*已经勾选的规则*/
+            $tree_data['tree_json_already'] = '';
+            if($group_rule['rules']){
+                $rule_sel_array['status'] = 1;
+                $rule_sel_array['id'] = array('in',$group_rule['rules']);
+                $rule_ids_info =  Db::name("auth_rule")->where($rule_sel_array)->select();
+               
+                $zNodes_sel_ids = '';
+                foreach ($rule_ids_info as $k => $v){
+                    $zNodes_sel_ids .= $v['id'].',';
+                }
+                $zNodes_sel_ids =  rtrim($zNodes_sel_ids, ',');
+                
+                //dump(json_encode($zNodes));
+                $tree_data['tree_json_already'] = trim($zNodes_sel_ids);
+            }
+            
+            /*全部的rule规则*/
+            $rule_all =  Db::name("auth_rule")->where(array('status'=>1))->select();
+            foreach ($rule_all as $k => $v_all){
+                $zNodes[$k]['id'] =  $v_all['id'];
+                $zNodes[$k]['pId'] =  0;
+                $zNodes[$k]['name'] = $v_all['title'];
+                $zNodes[$k]['open'] = "true";
+            }
+            $tree_data['tree_json'] = trim(json_encode($zNodes));
+
+            $tree_data['rule_all'] = $rule_all;
+            $this->view->assign('tree_data', $tree_data);
             return $this->view->fetch();
         }
+    }
+    public function access_table(){
+        $group_id =  Request::instance()->param('g_id/d');
+        if (!$group_id) {
+            return ajax_return_error("缺少必要参数");
+        }
+        if (Request::instance()->isPost()) {
+            
+        }else{
+            $group_rule = Db::name("auth_group")->where(array('id'=>$group_id))->find();
+
+            /*全部的rule规则*/
+            $rule_all =  Db::name("auth_rule")->where(array('status'=>1))->select();
+            
+            $table_data['rule_all'] = $rule_all;
+            $table_data['group_rule'] = $group_rule;
+
+            $this->view->assign('table_data', $table_data);
+            return $this->view->fetch();
+        }
+    }
+    public function  access_user(){
+        $group_id =  Request::instance()->param('g_id/d');
+        if (!$group_id) {
+            return ajax_return_error("缺少必要参数");
+        }
+
+        $group_users = Db::name("member")->where(array('id'=>$group_id))->find();
+
+        $table_data['rule_all'] = $rule_all;
+        $table_data['group_rule'] = $group_rule;
+
+        $this->view->assign('table_data', $table_data);
+        return $this->view->fetch();
     }
     /**
      * 生成权限树

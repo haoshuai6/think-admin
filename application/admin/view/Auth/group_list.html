@@ -41,7 +41,9 @@
                     <td class="f-14 td-manage">
                         <a style="text-decoration:none" class="ml-5" onClick="group_edit('编辑--[{$vo.title}]','{:\\think\\Url::build(\'Auth/group_edit\',[\'gid\'=>$vo.id])}')" href="javascript:;" title="编辑"><i class="Hui-iconfont Hui-iconfont-edit btn btn-primary-outline radius"></i></a>
                         <a style="text-decoration:none" class="ml-5" onClick="group_del(this,'{$vo[\'id\']}')" href="javascript:;" title="删除"><i class="Hui-iconfont Hui-iconfont-del2 btn btn-secondary-outline radius"></i></a>
-                        <a style="text-decoration:none" class="ml-5" onclick="group_access('授权','{:\\think\\Url::build(\'Auth/access_tree\',[\'gid\'=>$vo.id])}')" ><span class="btn btn-primary-outline radius"><i class="Hui-iconfont Hui-iconfont-manage2"></i> 授权</span></a>
+                        <a style="text-decoration:none" class="ml-5" onclick="group_access('授权-树状图','{:\\think\\Url::build(\'Auth/access_tree\',[\'g_id\'=>$vo.id])}')" ><span class="btn btn-primary-outline radius"><i class="Hui-iconfont Hui-iconfont-manage2"></i> 授权-树状图</span></a>
+                        <a style="text-decoration:none" class="ml-5" onclick="group_access('授权-表格','{:\\think\\Url::build(\'Auth/access_table\',[\'g_id\'=>$vo.id])}')" ><span class="btn btn-primary-outline radius"><i class="Hui-iconfont Hui-iconfont-manage2"></i> 授权-表格</span></a>
+                        <a style="text-decoration:none" class="ml-5" onclick="show_users('查看所属用户','{:\\think\\Url::build(\'Auth/access_user\',[\'g_id\'=>$vo.id])}')" ><span class="btn btn-primary-outline radius"><i class="Hui-iconfont Hui-iconfont-manage2"></i> 编辑所属用户</span></a>
 
                     </td>
                 </tr>
@@ -77,6 +79,9 @@
         layer_show(title,url,w,h);
     }
     function group_access(title,url,w,h){
+        layer_show(title,url,w,h);
+    }
+    function show_users(title,url,w,h){
         layer_show(title,url,w,h);
     }
     function group_del(obj,id){

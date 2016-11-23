@@ -1,0 +1,101 @@
+{extend name="template/base" /}
+{block name="style"}
+{/block}
+{block name="nav"}
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 分组授权 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+{/block}
+{block name="content"}
+<article class="page-container">
+    <form class="form form-horizontal" id="rule_form" method="post">
+        <div class="row cl">
+            <div class="formControls col-xs-6 col-sm-12">
+                <p class="f-18">对【<span class="c-orange">{$table_data['group_rule']['title']}</span>】进行规则授权</p>
+                <table class="table table-border table-bordered table-hover">
+                    <tbody>
+                    <tr>
+                        <td class="th-20">文章权限
+                            <input type="checkbox" name="" id="article" value=""> 全选
+                        </td>
+                        <td>
+                            <ul class="inline">
+                            {volist name="table_data['rule_all']" key="i" id="vo" }
+                                    <li>
+                                        <input type="checkbox" value="" id="aticle-check" name="group_rule[]"> {$vo.title}
+                                        {if condition="$i eq count($table_data['rule_all'])"}
+                                           {else /} <span class="pipe">|</span>
+                                        {/if}
+                                    </li>
+                            {/volist}
+                            </ul>
+                       </td>
+                    </tr>
+                    <tr>
+                        <td>用户权限
+                            <input type="checkbox" name="" id="user" value=""> 全选
+                        </td>
+                        <td>
+                            <ul class="inline" >
+                                {volist name="table_data['rule_all']" key="i" id="vo" }
+                                <li>
+                                    <input type="checkbox" value="" id="user-check" name="group_rule[]"> {$vo.title}
+                                    {if condition="$i eq count($table_data['rule_all'])"}
+                                    {else /} <span class="pipe">|</span>
+                                    {/if}
+                                </li>
+                                {/volist}
+                            </ul>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <input type="hidden" id="g_id" value="{$table_data['group_rule']['id']}">
+        <div class="row cl">
+            <div class="col-xs-8 col-sm-9">
+                <button onClick="access_save();" class="btn btn-secondary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存 </button>
+                <button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
+            </div>
+        </div>
+    </form>
+</article>
+{/block}
+{block name="script"}
+<script type="text/javascript">
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'icheckbox_flat-green'
+        });
+        $('#article').on('ifChecked', function(event){
+            $("input[id='aticle-check']").iCheck('check');
+        });
+        $('#article').on('ifUnchecked', function(event){
+            $("input[id='aticle-check']").iCheck('uncheck');
+        });
+        $('#user').on('ifChecked', function(event){
+            $("input[id='user-check']").iCheck('check');
+        });
+        $('#user').on('ifUnchecked', function(event){
+            $("input[id='user-check']").iCheck('uncheck');
+        });
+        $("#rule_form").Validform({
+            tiptype:2,
+            callback:function(form){
+                var check = confirm("您确定要提交表单吗？");
+                var path = "{:\\think\\Url::build(\'Auth/access_table\')}";
+                if(check){
+                    alert('123213');
+                    form[0].submit();
+                }
+
+                return false;
+            }
+        });
+    });
+
+
+
+</script>
+{/block}

@@ -11,7 +11,7 @@
 {block name="content"}
 <div class="page-container">
         <div class="pt-5 pr-5 pos-f" style="right: 20px;top: 20px;">
-            <button type="button" class="btn btn-primary radius save">&nbsp;&nbsp;保存&nbsp;&nbsp;</button>
+            <button type="button" onclick="check_node()" class="btn btn-primary radius save">&nbsp;&nbsp;保存&nbsp;&nbsp;</button>
             <button type="button" class="ml-20 btn btn-default radius" onclick="layer_close()">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
         </div>
         <div>
@@ -32,9 +32,27 @@
                 enable: true
             }
         }
+        /*callback: {
+            onCheck: onCheck
+        }*/
     };
-    var zNodes =[
-        { id:1, pId:0, name:"随意勾选 1", open:true},
+  /*可以采用ajax异步加载*/
+  /*  $.ajax({
+        type: "post",
+        contentType: "application/json",
+        url: "Index.aspx/FindAll",
+        data: "{}",
+        dataType: "json",
+        success: function (result) {
+            var zNodes = result.d; //接受webservice里面传过来的list
+            $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+        }
+    });*/
+    /*亦可以直接输出到模版*/
+    var zNodes = {$tree_data.tree_json};
+
+    /*var zNodes =[
+        { "id":"1", "pId":"0", "name":"随意勾选 1", "open":"true"},
         { id:11, pId:1, name:"随意勾选 1-1", open:true},
         { id:111, pId:11, name:"随意勾选 1-1-1"},
         { id:112, pId:11, name:"随意勾选 1-1-2"},
@@ -47,10 +65,63 @@
         { id:221, pId:22, name:"随意勾选 2-2-1", checked:true},
         { id:222, pId:22, name:"随意勾选 2-2-2"},
         { id:23, pId:2, name:"随意勾选 2-3"}
-    ];
+    ];*/
 
     $(function(){
         $.fn.zTree.init($("#tree"), setting, zNodes);
+        var zTreeObj = $.fn.zTree.getZTreeObj("tree");
+        var ids_array =  new Array();
+        var ids_str ='{$tree_data.tree_json_already}';
+        if(ids_str.length > 0 ){
+            ids_array = ids_str.split(","); //分割
+        }
+        for( var i=0 ,length = ids_array.length; i < length; i ++ ) {
+            zTreeObj.checkNode( zTreeObj.getNodeByParam( "id",ids_array[i] ), true );
+        }
+
     });
+    function check_node(){
+        var zTree = $.fn.zTree.getZTreeObj("tree"),
+        nodes = zTree.getCheckedNodes(true),
+        v = "";
+        va= "" ;
+        for (var i=0, l = nodes.length; i<l; i++) {
+            if(i==0){
+                v += nodes[i].name  ;
+                va += nodes[i].id ;
+            }else{
+                v += ","+nodes[i].name  ;
+                va += ","+nodes[i].id ;
+            }
+        }
+        alert(va);
+    }
+
+    /*function filter(node) {   //过滤器直选中2级节点累加
+        return (node.level == 2 && node.checked == true);
+    }
+
+    function onCheck(e, treeId, treeNode){  //这是将所有选中节点的名字 用,分割做拼接 用于持久化到数据库
+        var zTree = $.fn.zTree.getZTreeObj("tree").getNodesByFilter(filter);
+        var choose = "";
+        for (var i=0;i<zTree.length;i++) {
+            if(zTree[i].name !=null)
+                choose +=(i == (zTree.length-1))?zTree[i].name:zTree[i].name+",";
+        }
+        $("#ztreesnames").val(choose);
+        treeIds();
+    }
+
+    function treeIds(){    //这是将选中的节点的id用;分割拼接起来,用于持久化到数据库
+        var zTreeO =  $.fn.zTree.getZTreeObj("tree").getNodesByFilter(filter);
+        var idListStr = "";
+        for (var i = 0; i < zTreeO.length; i++) {
+            if (zTreeO[i].id != null) {
+                idListStr+= (i == (zTreeO.length-1))?zTreeO[i].id:zTreeO[i].id+";";
+            }
+        };
+        $("#ztreeids").val(idListStr);
+    };*/
+
 </script>
 {/block}
