@@ -9,33 +9,25 @@
     <title>{$Think.config.site.title}</title>
     <meta name="keywords" content="{$Think.config.site.keywords}">
     <meta name="description" content="{$Think.config.site.description}">
-
     <link rel="Bookmark" href="/favicon.ico" >
     <link rel="Shortcut Icon" href="/favicon.ico" />
-
     <!--[if lt IE 9]>
     <script type="text/javascript" src="__ADMIN_LIB__/html5.js"></script>
     <script type="text/javascript" src="__ADMIN_LIB__/respond.min.js"></script>
     <script type="text/javascript" src="__ADMIN_LIB__/PIE_IE678.js"></script>
     <![endif]-->
-
     <link rel="stylesheet" type="text/css" href="__ADMIN_UI_CORE__/h-ui/css/H-ui.min.css" />
     <link rel="stylesheet" type="text/css" href="__ADMIN_UI_CORE__/h-ui.admin/css/H-ui.admin.css" />
     <link rel="stylesheet" type="text/css" href="__ADMIN_LIB__/Hui-iconfont/1.0.7/iconfont.css" />
-
     <link rel="stylesheet" type="text/css" href="__ADMIN_LIB__/icheck/skins/flat/_all.css" />
-
     <link rel="stylesheet" type="text/css" href="__ADMIN_UI_CORE__/h-ui.admin/skin/default/skin.css" id="skin" />
     <link rel="stylesheet" type="text/css" href="__ADMIN_UI_CORE__/h-ui.admin/css/style.css" />
-
     <!--[if IE 6]>
     <script type="text/javascript" src="__ADMIN_LIB__/DD_belatedPNG_0.0.8a-min.js" ></script>
     <script>DD_belatedPNG.fix('*');</script>
     <![endif]-->
-
 </head>
 <body>
-
 <header class="navbar-wrapper">
     <div class="navbar navbar-fixed-top">
         <div class="container-fluid cl"><a class="logo navbar-logo f-l mr-10 hidden-xs" href="{:\\think\\Url::build('/admin')}">{$Think.config.site.name}</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="{:\\think\\Url::build('/admin')}">tp</a> <span class="logo navbar-slogan f-l mr-10 hidden-xs">{$Think.config.site.version}</span> <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
@@ -66,7 +58,6 @@
         </div>
     </div>
 </header>
-
 <aside class="Hui-aside">
     <input runat="server" id="divScrollValue" type="hidden" value="" />
     <div class="menu_dropdown bk_2">
@@ -126,7 +117,6 @@
 
     </div>
 </aside>
-
 <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:;" onClick="displaynavbar(this)"></a></div>
 <section class="Hui-article-box">
     <div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
@@ -144,12 +134,10 @@
         </div>
     </div>
 </section>
-
 <script type="text/javascript" src="__ADMIN_LIB__/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="__ADMIN_LIB__/layer/2.4/layer.js"></script>
 <script type="text/javascript" src="__ADMIN_UI_CORE__/h-ui/js/H-ui.js"></script>
 <script type="text/javascript" src="__ADMIN_UI_CORE__/h-ui.admin/js/H-ui.admin.js"></script>
-
 <script>
     function logout() {
         layer.confirm('您确定要退出登录？',{title:'登出提醒'},function (index) {
